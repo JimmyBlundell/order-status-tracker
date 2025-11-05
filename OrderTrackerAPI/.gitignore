@@ -1,0 +1,18 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+bin/
+obj/
+*.dll
+*.exe
+
+# VS Code
+.vscode/
+.DS_Store
+
+# Node (for Angular later)
+node_modules/
+dist/
+
+# Environment
+*.env
