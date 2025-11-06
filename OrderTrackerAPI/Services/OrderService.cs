@@ -87,5 +87,26 @@ namespace OrderTrackerAPI.Services
             .OrderBy(h => h.Timestamp)
             .ToList();
         }
+
+        public void AdvanceOrderStatus(int orderId, OrderStatus newStatus)
+        {
+            var order = _orders.FirstOrDefault(o => o.Id == orderId);
+
+            if (order != null)
+            {
+                order.Status = newStatus;
+
+                // Add history entry
+                var historyEntry = new OrderStatusHistory
+                {
+                    Id = _orderHistory.Count + 1,
+                    OrderId = orderId,
+                    Status = newStatus,
+                    Timestamp = DateTime.Now,
+                    Notes = $"Status updated to {newStatus}"
+                };
+                _orderHistory.Add(historyEntry);
+            }
+        }
     }
 }
