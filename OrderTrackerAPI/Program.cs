@@ -9,7 +9,7 @@ builder.Services.AddSwaggerGen();
 // Register our OrderService for dependency injection
 builder.Services.AddSingleton<OrderService>();
 
-// Add CORS for Angular frontend (we'll need this tomorrow)
+// Add CORS for Angular frontend
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
