@@ -1,0 +1,63 @@
+<div class="detail-container">
+    @if (successMessage) {
+      <div class="toast">{{ successMessage }}</div>
+  }
+  <button class="back-button" routerLink="/">← Back to Search</button>
+
+  @if (loading) {
+    <div class="loading">
+      <div class="spinner"></div>
+      <div>Loading order details...</div>
+    </div>
+  }
+
+  @if (error) {
+    <div class="error">{{ error }}</div>
+  }
+
+  @if (order && !loading) {
+    <div class="order-content">
+      <div class="order-header">
+        <h1>Order {{ order.orderNumber }}</h1>
+        <span class="status-badge">{{ getStatusName(order.status) }}</span>
+      </div>
+
+      <div class="order-info">
+        <div class="info-row">
+          <span class="label">Order Date:</span>
+          <span>{{ order.orderDate | date:'medium' }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Total Amount:</span>
+          <span>${{ order.totalAmount }}</span>
+        </div>
+        @if (order.description) {
+          <div class="info-row">
+            <span class="label">Description:</span>
+            <span>{{ order.description }}</span>
+          </div>
+        }
+      </div>
+
+      @if (order.status < 3) {
+        <button class="advance-button" (click)="advanceStatus()">
+          Advance Status
+        </button>
+      }
+
+      <h2>Order History</h2>
+      <div class="timeline">
+        @for (item of history; track item.id) {
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-status">{{ getStatusName(item.status) }}</div>
+              <div class="timeline-date">{{ item.timestamp | date:'short' }}</div>
+              <div class="timeline-notes">{{ item.notes }}</div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>
