@@ -46,6 +46,8 @@ order-status-tracker/
 
 ## Setup Instructions
 
+- Clone repo and ensure you're on the 'main' branch
+
 ### Backend Setup
 
 1. Navigate to the API directory:
