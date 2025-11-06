@@ -1,59 +1,152 @@
-# OrderTrackerUi
+# Order Status Tracker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
+A full-stack order tracking application built with C# Web API backend and Angular frontend.
 
-## Development server
+## Tech Stack
 
-To start a local development server, run:
+**Backend:**
+- .NET 9 Web API
+- C#
+- Swagger/OpenAPI documentation
 
+**Frontend:**
+- Angular 20
+- TypeScript
+- RxJS
+
+## Features
+
+- Search orders by order number
+- View detailed order information
+- Timeline visualization of order status history
+- Simulate order status progression
+- Error handling for invalid orders
+- Loading states and success notifications
+
+## Project Structure
+```
+order-status-tracker/
+├── OrderTrackerAPI/         # C# Web API backend
+│   ├── Controllers/         # API endpoints
+│   ├── Models/              # Data models
+│   ├── Services/            # Business logic
+│   └── Program.cs           # Application entry point
+└── order-tracker-ui/        # Angular frontend
+    └── src/app/
+        ├── order-detail/    # Detail component
+        ├── order-search/    # Search component
+        └── services/        # API service layer
+```
+
+## Prerequisites
+
+- [.NET 9 SDK](https://dotnet.microsoft.com/download)
+- [Node.js 20+](https://nodejs.org/)
+- [Angular CLI](https://angular.io/cli) (`npm install -g @angular/cli`)
+
+## Setup Instructions
+
+### Backend Setup
+
+1. Navigate to the API directory:
+```bash
+cd OrderTrackerAPI
+```
+
+2. Restore dependencies:
+```bash
+dotnet restore
+```
+
+3. Run the API:
+```bash
+dotnet run
+```
+
+The API will start on `http://localhost:5075`
+
+Swagger documentation available at: `http://localhost:5075/swagger`
+
+### Frontend Setup
+
+1. Navigate to the UI directory:
+```bash
+cd order-tracker-ui
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The application will be available at `http://localhost:4200`
 
-## Code scaffolding
+## Sample Order Numbers
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Try these order numbers to see different states:
+- `ORD-10001` - Delivered (full history)
+- `ORD-10002` - Shipped (can advance status)
+- `ORD-10003` - Processing (can advance status)
+- `ORD-10004` - Pending (can advance status)
 
-```bash
-ng generate component component-name
-```
+## API Endpoints
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### GET /api/orders/{orderId}
+Returns order summary including current status, total amount, and order date.
 
-```bash
-ng generate --help
-```
+### GET /api/orders/{orderId}/history
+Returns complete status history for an order with timestamps and notes.
 
-## Building
+### POST /api/orders/{orderId}/advance-status
+Simulates order progression by advancing to the next status.
 
-To build the project run:
+## Architecture Decisions
 
-```bash
-ng build
-```
+### Backend
+- **Service Layer Pattern**: Separated business logic (OrderService) from HTTP concerns (OrdersController) for better testability and maintainability
+- **Dependency Injection**: OrderService is automatically provided to the controller by .NET, making the code more testable and flexible
+- **Repository Pattern Ready**: Data access is abstracted in OrderService
+- **Entity Framework Modeling**: Models structured as they would be for EF Core (primary keys, foreign keys, navigation properties)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Frontend
+- **Component Architecture**: Clear separation between search and detail components
+- **Service Layer**: API calls isolated in OrderService for reusability
+- **RxJS Observables**: Used forkJoin to call multiple endpoints simultaneously
+- **Modern Angular**: Utilized new control flow syntax (@if, @for) instead of deprecated directives
 
-## Running unit tests
+## Security Considerations
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+**Current Implementation:**
+- Input validation on order ID format
+- Proper HTTP status codes (404, 400, 200)
+- CORS configuration for local development
 
-```bash
-ng test
-```
+**Production Additions Needed:**
+- Authentication & Authorization (JWT with [Authorize] attributes)
+- Validate users can only access their own orders (e.g. order.CustomerId == User.Identity.UserId)
+- Environment-based configuration (API keys, connection strings)
+- Request rate limiting
+- Structured logging for security events
 
-## Running end-to-end tests
+**Note:** The TODO comments in the controller indicate where authentication checks would be added in a production environment.
 
-For end-to-end (e2e) testing, run:
+## Testing
 
-```bash
-ng e2e
-```
+Automated tests were not implemented. In a production environment, I would add:
+- Backend: Unit tests for OrderService business logic and controller endpoints
+- Frontend: Component tests for user interactions and service API calls
+- End-to-end tests for the complete order lookup flow
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Future Enhancements
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Real database integration (SQL Server with Entity Framework Core)
+- User authentication and authorization
+- Order creation and modification
+- Advanced filtering and search capabilities
+- Pagination for order history
+- Export order details to PDF
