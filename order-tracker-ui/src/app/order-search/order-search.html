@@ -1,0 +1,14 @@
+<div class="search-container">
+  <h1>Order Status Tracker</h1>
+  <div class="search-box">
+    <input
+      type="text"
+      [(ngModel)]="orderNumber"
+      placeholder="Enter Order Number (e.g., ORD-10001)"
+      class="order-input"
+    />
+    <button (click)="onSubmit()" class="search-button">
+      View Order
+    </button>
+  </div>
+</div>
