@@ -75,5 +75,17 @@ namespace OrderTrackerAPI.Services
         new OrderStatusHistory { Id = 10, OrderId = 4, Status = OrderStatus.Pending, Timestamp = DateTime.Now, Notes = "Awaiting payment" }
     };
         }
+
+        public Order GetOrderByOrderNumber(string orderNumber)
+        {
+            return _orders.FirstOrDefault(o => o.OrderNumber == orderNumber);
+        }
+
+        public List<OrderStatusHistory> GetOrderHistory(int orderId)
+        {
+            return _orderHistory.Where(h => h.OrderId == orderId)
+            .OrderBy(h => h.Timestamp)
+            .ToList();
+        }
     }
 }

@@ -1,8 +1,0 @@
-/Users/jimmyblundell/Desktop/order-status-tracker/OrderTrackerAPI/obj/Debug/net9.0/OrderTrackerAPI.csproj.AssemblyReference.cache
-/Users/jimmyblundell/Desktop/order-status-tracker/OrderTrackerAPI/obj/Debug/net9.0/rpswa.dswa.cache.json
-/Users/jimmyblundell/Desktop/order-status-tracker/OrderTrackerAPI/obj/Debug/net9.0/OrderTrackerAPI.GeneratedMSBuildEditorConfig.editorconfig
-/Users/jimmyblundell/Desktop/order-status-tracker/OrderTrackerAPI/obj/Debug/net9.0/OrderTrackerAPI.AssemblyInfoInputs.cache
-/Users/jimmyblundell/Desktop/order-status-tracker/OrderTrackerAPI/obj/Debug/net9.0/OrderTrackerAPI.AssemblyInfo.cs
-/Users/jimmyblundell/Desktop/order-status-tracker/OrderTrackerAPI/obj/Debug/net9.0/OrderTrackerAPI.csproj.CoreCompileInputs.cache
-/Users/jimmyblundell/Desktop/order-status-tracker/OrderTrackerAPI/obj/Debug/net9.0/OrderTrackerAPI.MvcApplicationPartsAssemblyInfo.cs
-/Users/jimmyblundell/Desktop/order-status-tracker/OrderTrackerAPI/obj/Debug/net9.0/OrderTrackerAPI.MvcApplicationPartsAssemblyInfo.cache

@@ -15,4 +15,5 @@ node_modules/
 dist/
 
 # Environment
-*.env
+*.envbin/
+obj/
